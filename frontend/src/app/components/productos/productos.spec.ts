@@ -1,26 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-// 1. Corregimos la importación para usar el nombre real
-import { ProductosComponent } from './productos'; 
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { ProductosComponent } from './productos';
 
 describe('ProductosComponent', () => {
-  // 2. Actualizamos el tipo de la variable
-  let component: ProductosComponent;
-  let fixture: ComponentFixture<ProductosComponent>;
-
-  beforeEach(async () => {
+  it('should create', async () => {
     await TestBed.configureTestingModule({
-      // 3. Actualizamos el import del módulo
-      imports: [ProductosComponent], 
+      imports: [ProductosComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
-
-    // 4. Actualizamos la creación del componente
-    fixture = TestBed.createComponent(ProductosComponent); 
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+    expect(TestBed.createComponent(ProductosComponent).componentInstance).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('shows productos after the initial request without another interaction', async () => {
+    await TestBed.configureTestingModule({
+      imports: [ProductosComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(ProductosComponent);
+    const http = TestBed.inject(HttpTestingController);
+    fixture.detectChanges();
+
+    http.expectOne('http://localhost:8080/api/productos').flush([
+      { id: 1, nombre: 'Teclado', precio: 80, stock: 3 },
+    ]);
+    await fixture.whenStable();
+
+    expect(fixture.nativeElement.textContent).toContain('Teclado');
+    http.verify();
   });
 });

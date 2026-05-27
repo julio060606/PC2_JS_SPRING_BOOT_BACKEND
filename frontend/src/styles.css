@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --page-bg: #f4f7fb;
+  --card-border: #dbe4ef;
+  --heading-color: #17324d;
+  --muted-text: #597086;
+}
+
+body {
+  background: var(--page-bg);
+  color: #233548;
+}
+
+h1,
+h2 {
+  color: var(--heading-color);
+}
+
+.btn {
+  border-radius: 0.45rem;
+}
+
+.form-control,
+.form-select {
+  border-color: #cbd8e5;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #5c8fba;
+  box-shadow: 0 0 0 0.2rem rgba(56, 118, 169, 0.13);
+}

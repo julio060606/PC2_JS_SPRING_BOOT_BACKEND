@@ -1,5 +1,5 @@
 export interface Producto {
-  id?: number; // El '?' es vital para evitar errores de TypeScript al insertar
+  id?: number;
   nombre: string;
   precio: number;
   stock: number;

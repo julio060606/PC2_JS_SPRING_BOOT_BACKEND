@@ -32,11 +32,9 @@ Divide la terminal de Codespaces (haz clic en el ícono de las dos ventanas junt
 
 Ingresa a la carpeta del frontend, instala las dependencias y levanta el servidor:
 cd frontend
-npm install
-
-npm install -g @angular/cli
-ng serve (responder y luego n)
-(Nota: El comando npm install es obligatorio la primera vez que entras al Codespace para que se genere la carpeta node_modules).
+pnpm install
+pnpm start
+(Nota: El comando pnpm install es obligatorio la primera vez que entras al Codespace para que se genere la carpeta node_modules).
 
 Paso 3: Puertos y CORS
 El Backend corre en el puerto 8080.

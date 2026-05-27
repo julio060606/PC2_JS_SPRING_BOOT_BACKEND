@@ -1,1 +1,53 @@
-<p>cursos works!</p>
+<header class="module-header">
+  <h1>Cursos</h1>
+  <p>Revisa cupos disponibles y registra matriculados.</p>
+</header>
+
+<p class="alert alert-success py-2" *ngIf="mensaje()">{{ mensaje() }}</p>
+<p class="alert alert-danger py-2" *ngIf="error()">{{ error() }}</p>
+
+<form *ngIf="cursoSeleccionado() as cursoActivo" class="module-panel enrollment-panel mb-4" #formMatricula="ngForm" (ngSubmit)="registrarMatricula()">
+  <h2 class="section-title">Matricular en {{ cursoActivo.nombre }}</h2>
+  <div class="row g-2">
+    <div class="col-md-5">
+      <label class="form-label" for="matriculadoNombre">Nombre</label>
+      <input id="matriculadoNombre" class="form-control" name="nombre" [(ngModel)]="matricula.nombre" required maxlength="120">
+    </div>
+    <div class="col-md-5">
+      <label class="form-label" for="matriculadoEmail">Email</label>
+      <input id="matriculadoEmail" class="form-control" name="email" type="email" [(ngModel)]="matricula.email" required maxlength="180">
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+      <button class="btn btn-primary w-100" type="submit" [disabled]="formMatricula.invalid">Matricular</button>
+    </div>
+  </div>
+  <button class="btn btn-link mt-2" type="button" (click)="cancelar()">Cancelar</button>
+</form>
+
+<p class="loading-state" *ngIf="cargando()">Cargando cursos...</p>
+
+<div class="course-grid">
+<div class="card course-card" *ngFor="let curso of cursos()">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h2 class="h5">{{ curso.nombre }}</h2>
+        <p>{{ curso.descripcion }}</p>
+        <p class="availability mb-2">Cupos disponibles: <strong>{{ curso.cuposDisponibles }}</strong> / {{ curso.cupos }}</p>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="button" (click)="seleccionar(curso)" [disabled]="curso.cuposDisponibles === 0">
+          Matricular
+        </button>
+      </div>
+    </div>
+    <strong>Matriculados</strong>
+    <ul class="students mb-0">
+      <li *ngFor="let estudiante of curso.matriculados">{{ estudiante.nombre }} - {{ estudiante.email }}</li>
+      <li *ngIf="curso.matriculados.length === 0">Sin matriculados.</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<p class="empty-state" *ngIf="!cargando() && cursos().length === 0">No hay cursos registrados.</p>

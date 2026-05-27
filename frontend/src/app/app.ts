@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-// 1. Importa tu componente de productos
-import { ProductosComponent } from './components/productos/productos'; 
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // 2. Quitamos RouterOutlet de aquí
-  imports: [CommonModule, ProductosComponent], 
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css'],
 })
 export class App {
-  title = 'frontend';
+  title = 'Gestion PC2';
 }

@@ -1,16 +1,11 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { TareaService } from './tarea';
 
-import { Tarea } from './tarea';
-
-describe('Tarea', () => {
-  let service: Tarea;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Tarea);
-  });
-
+describe('TareaService', () => {
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    TestBed.configureTestingModule({ providers: [provideHttpClient(), provideHttpClientTesting()] });
+    expect(TestBed.inject(TareaService)).toBeTruthy();
   });
 });
