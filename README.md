@@ -99,22 +99,21 @@ CORS_ALLOWED_ORIGINS=http://localhost:4200
 `DDL_AUTO=validate` hace que Hibernate valide las tablas creadas por el script
 sin intentar construir el esquema durante el despliegue.
 
-Una vez que Vercel entregue la URL del frontend, actualizar Render:
+Configurar Render para admitir el frontend desplegado:
 
 ```text
-CORS_ALLOWED_ORIGINS=http://localhost:4200,https://URL-FRONTEND-VERCEL
+CORS_ALLOWED_ORIGINS=http://localhost:4200,https://pc2-frontend.vercel.app
 ```
 
 ## Despliegue Frontend En Vercel
 
-Antes de crear el deploy, reemplazar en
-`frontend/src/environments/environment.production.ts` la URL local por la URL
-publica real de Render:
+La configuracion de produccion del frontend debe apuntar al backend publico de
+Render:
 
 ```ts
 export const environment = {
   production: true,
-  apiUrl: 'https://URL-BACKEND-RENDER/api',
+  apiUrl: 'https://pc2-backend-kbf8.onrender.com/api',
 };
 ```
 
@@ -134,17 +133,15 @@ SPA como `/productos`, `/pedidos`, `/incidencias/dashboard`, `/cursos`,
 
 ## Enlaces De Produccion
 
-Completar al finalizar los despliegues:
-
 ```text
-Frontend (Vercel): https://URL-FRONTEND-VERCEL
-Backend (Render):  https://URL-BACKEND-RENDER
+Frontend (Vercel): https://pc2-frontend.vercel.app
+Backend (Render):  https://pc2-backend-kbf8.onrender.com
 ```
 
 ## Checklist Para Presentacion
 
 1. Confirmar que la base Render contiene tablas y datos de prueba.
-2. Abrir `https://URL-BACKEND-RENDER/api/productos` minutos antes para
+2. Abrir `https://pc2-backend-kbf8.onrender.com/api/productos` minutos antes para
    despertar el servicio gratuito.
 3. Abrir el frontend Vercel y recorrer los cuatro modulos.
 4. Probar una operacion representativa en cada modulo.
