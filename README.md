@@ -1,6 +1,12 @@
 # Proyecto PC2 - Frontend Angular Y Backend Spring Boot
 
-Aplicacion fullstack de demostracion con cuatro modulos:
+Desarrolladores:
+- Leonardo Gonzales Delgado
+- Kevin Briceño Zegarra
+- Julio Minaya Urdanivia
+- Andy Calagua Medina 
+
+Actividad: Aplicacion fullstack para la PC2 de JavaScript Avanzado con cuatro modulos:
 
 - Cafeteria: consultar productos y registrar pedidos que descuentan stock.
 - Laboratorio: registrar incidencias y actualizar su estado de atencion.
@@ -74,63 +80,6 @@ POST /api/tareas
 PUT  /api/tareas/{id}
 DELETE /api/tareas/{id}
 ```
-
-## Despliegue Backend En Render
-
-Crear el Web Service desde este repositorio con estos valores:
-
-```text
-Root Directory: backend
-Runtime: Docker
-Dockerfile: Dockerfile
-Health Check Path: /api/productos
-```
-
-Configurar las variables del servicio:
-
-```text
-DB_URL=jdbc:postgresql://HOST_INTERNO_RENDER:5432/BASE_RENDER
-DB_USERNAME=USUARIO_RENDER
-DB_PASSWORD=PASSWORD_RENDER
-DDL_AUTO=validate
-CORS_ALLOWED_ORIGINS=http://localhost:4200
-```
-
-`DDL_AUTO=validate` hace que Hibernate valide las tablas creadas por el script
-sin intentar construir el esquema durante el despliegue.
-
-Configurar Render para admitir el frontend desplegado:
-
-```text
-CORS_ALLOWED_ORIGINS=http://localhost:4200,https://pc2-frontend.vercel.app
-```
-
-## Despliegue Frontend En Vercel
-
-La configuracion de produccion del frontend debe apuntar al backend publico de
-Render:
-
-```ts
-export const environment = {
-  production: true,
-  apiUrl: 'https://pc2-backend-kbf8.onrender.com/api',
-};
-```
-
-Configurar el proyecto Vercel:
-
-```text
-Root Directory: frontend
-Framework Preset: Angular
-Install Command: pnpm install --frozen-lockfile
-Build Command: pnpm build
-Output Directory: dist/mi-app/browser
-```
-
-El archivo `frontend/vercel.json` permite abrir y recargar directamente rutas
-SPA como `/productos`, `/pedidos`, `/incidencias/dashboard`, `/cursos`,
-`/matricula` y `/tareas`.
-
 ## Enlaces De Produccion
 
 ```text
@@ -138,11 +87,10 @@ Frontend (Vercel): https://pc2-frontend.vercel.app
 Backend (Render):  https://pc2-backend-kbf8.onrender.com
 ```
 
-## Checklist Para Presentacion
+## Pasos para ejecutar nuestra aplicación:
 
-1. Confirmar que la base Render contiene tablas y datos de prueba.
-2. Abrir `https://pc2-backend-kbf8.onrender.com/api/productos` minutos antes para
-   despertar el servicio gratuito.
-3. Abrir el frontend Vercel y recorrer los cuatro modulos.
-4. Probar una operacion representativa en cada modulo.
-5. No versionar `backend/env/local.env` ni credenciales de Render.
+1. Abrir `https://pc2-backend-kbf8.onrender.com` minutos antes para
+   despertar el servicio gratuito, hasta que salga el mensaje de Spring Boot confirmando
+   que encendió.
+2. Abrir el frontend Vercel y recorrer los cuatro modulos.
+3. Probar una operacion representativa en cada modulo. Listo!
